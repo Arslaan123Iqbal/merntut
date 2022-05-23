@@ -3,9 +3,12 @@ import createHttpError from "http-errors";
 import exampleRoute from "./routes/exampleRoutes";
 import mongoose from "mongoose";
 import { DB, PORT } from "./config";
+import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorHanlder";
 import morgan from "morgan";
 const app = express();
+
+dotenv.config()
 app.use(express.json());
 
 app.use("/", exampleRoute);
@@ -15,6 +18,8 @@ app.use(() => {
 });
 
 app.use(errorHandler);
+
+
 
 mongoose
   .connect(DB)
